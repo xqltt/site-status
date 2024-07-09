@@ -44,6 +44,11 @@ const Header = observer(({ getSiteData }) => {
         content: "The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.",
       });
   };
+      messageApi.open({
+        key: "updata",
+        type: "info",
+        content: "The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.",
+      });
 
   return (
     <header id="header" className={status.siteState}>
