@@ -47,7 +47,12 @@ const Header = observer(({ getSiteData }) => {
       messageApi.open({
         key: "updata",
         type: "info",
-        content: "The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br/>目前国外检测节点对cdn服务器的访问可能会出现错误造成误报,国内不受影响.",
+      content: (
+        <div>
+          The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br />
+          目前国外检测节点对cdn服务器的访问可能会出现错误造成误报,国内不受影响.
+        </div>
+      ),
         dangerouslySetInnerHTML: true,
         duration: 5,
       });
