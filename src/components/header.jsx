@@ -50,13 +50,13 @@ const Header = observer(({ getSiteData }) => {
         目前国外检测节点对cdn服务器的访问可能会出现错误造成误报,国内不受影响.
       </span>
       <button 
-        onClick={() => messageApi.close("updata")}
+        onClick={() => messageApi.destroy()}
         style={{
           position: 'absolute',
           right: '10px',
-          bottom: '10px',
+          bottom: '5px',
           padding: '10px 20px',
-          backgroundColor: '#e6f7ff',
+          backgroundColor: '#6495ED',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer'
