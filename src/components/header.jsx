@@ -38,15 +38,11 @@ const Header = observer(({ getSiteData }) => {
     cache.changeSiteData(null);
     getSiteData();
     setLastClickTime(currentTime);
-    messageApi.open({
-        key: "updata",
-        type: "info",
-        content: "The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.",
-      });
   };
       messageApi.open({
         key: "updata",
         type: "info",
+        icon: <img src="https://cdn.mysteryteam.org.cn/images/info.png" style={{ width: '24px', height: '24px' }} alt="info icon" />,
       content: (
         <div>
           The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br />
