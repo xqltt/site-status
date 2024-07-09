@@ -45,11 +45,12 @@ const Header = observer(({ getSiteData }) => {
         icon: <img src="https://cdn.mysteryteam.org.cn/images/info.png" style={{ width: '50px', height: '50px' }} alt="info icon" />,
       content: (
         <div>
-          The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br />
+          <span style={{ fontSize: '25px' }}>
+          The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br/>
           目前国外检测节点对cdn服务器的访问可能会出现错误造成误报,国内不受影响.
+          </span>
         </div>
       ),
-        dangerouslySetInnerHTML: true,
         duration: 5,
       });
 
