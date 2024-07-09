@@ -38,6 +38,11 @@ const Header = observer(({ getSiteData }) => {
     cache.changeSiteData(null);
     getSiteData();
     setLastClickTime(currentTime);
+    messageApi.open({
+        key: "updata",
+        type: "info",
+        content: "部分宕机是因为国外检测节点被风控拦截,国内不受访问影响.",
+      });
   };
 
   return (
