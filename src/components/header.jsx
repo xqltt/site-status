@@ -38,19 +38,23 @@ const Header = observer(({ getSiteData }) => {
     cache.changeSiteData(null);
     getSiteData();
     setLastClickTime(currentTime);
+    fetchMessageContent();
   };
+    // Fetch message content from the server
+  const fetchMessageContent = async () => {
+    try {
+      const response = await fetch('https://member.mysteryteam.org.cn/Qinglong/testpage/getmessage.php');
+      const data = await response.json();
+      setRemoteContent(data.message);
       messageApi.open({
-        key: "updata",
-        type: "info",
+        key: 'updata',
+        type: 'info',
         icon: <img src="https://cdn.mysteryteam.org.cn/images/info.png" style={{ width: '50px', height: '50px' }} alt="info icon" />,
-      content: (
-    <div style={{ position: 'relative', paddingBottom: '40px' }}>
-      <span style={{ fontSize: '25px' }}>
-        The Mystery Team 主站相关服务宕机是因为国外检测节点被风控拦截,国内不受访问影响.<br />
-        目前国外检测节点对cdn服务器的访问可能会出现错误造成误报,国内不受影响.
-      </span>
-      <button 
-        onClick={() => messageApi.destroy()}
+        content: (
+          <div style={{ position: 'relative', paddingBottom: '40px' }}>
+            <span style={{ fontSize: '25px' }} dangerouslySetInnerHTML={{ __html: data.message }} />
+            <button
+              onClick={() => messageApi.close('updata')}
         style={{
           position: 'absolute',
           right: '10px',
@@ -61,13 +65,24 @@ const Header = observer(({ getSiteData }) => {
           borderRadius: '5px',
           cursor: 'pointer'
         }}
-      >
-        关闭
-      </button>
-    </div>
-      ),
-        duration: 5,
+            >
+              关闭
+            </button>
+          </div>
+        ),
+        duration: 0,
+        onClose: () => {
+          console.log('Message closed');
+        },
       });
+    } catch (error) {
+      console.error('Error fetching message content:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessageContent(); // Fetch the message content when the component mounts
+  }, []);
 
   return (
     <header id="header" className={status.siteState}>
