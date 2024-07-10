@@ -11,6 +11,7 @@ const Header = observer(({ getSiteData }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { status, cache } = useStores();
   const [lastClickTime, setLastClickTime] = useState(0);
+  const [remoteContent, setRemoteContent] = useState('');
 
   // 加载配置
   const siteName = import.meta.env.VITE_SITE_NAME;
