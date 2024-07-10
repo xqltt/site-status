@@ -54,7 +54,7 @@ const Header = observer(({ getSiteData }) => {
           <div style={{ position: 'relative', paddingBottom: '40px' }}>
             <span style={{ fontSize: '25px' }} dangerouslySetInnerHTML={{ __html: data.message }} />
             <button
-              onClick={() => messageApi.close('updata')}
+              onClick={() => messageApi.destroy()}
         style={{
           position: 'absolute',
           right: '10px',
@@ -70,10 +70,7 @@ const Header = observer(({ getSiteData }) => {
             </button>
           </div>
         ),
-        duration: 0,
-        onClose: () => {
-          console.log('Message closed');
-        },
+        duration: 5,
       });
     } catch (error) {
       console.error('Error fetching message content:', error);
