@@ -51,7 +51,6 @@ const fetchMessageContent = async () => {
 
     // 检查是否包含 message 字段
     if (data.message) {
-      console.log('Message found:', data.message); // Log the message content
       setRemoteContent(data.message);
       messageApi.open({
         key: 'update',
@@ -96,8 +95,13 @@ const fetchMessageContent = async () => {
       const formatter = new Intl.DateTimeFormat('zh-CN', options);
       const parts = formatter.formatToParts(now);
       const formattedDate = `${parts[0].value}-${parts[2].value}-${parts[4].value} ${parts[6].value}:${parts[8].value}:${parts[10].value}`;
-      
-      console.log(`没有收到远端下发的公告 - ${formattedDate}`);
+      messageApi.open({
+        key: 'msgdata',
+        type: 'info',
+        content: `没有收到远端下发的公告 - ${formattedDate}`,
+        duration: 3,
+        placement: 'bottomRight',
+      });
     }
   } catch (error) {
     console.error('Error fetching message content:', error);
