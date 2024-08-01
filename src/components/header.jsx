@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { observer } from "mobx-react-lite";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { formatTimestamp } from "@/utils/timeTools";
@@ -12,6 +12,7 @@ const Header = observer(({ getSiteData }) => {
   const { status, cache } = useStores();
   const [lastClickTime, setLastClickTime] = useState(0);
   const [remoteContent, setRemoteContent] = useState('');
+  const autoRefreshRef = useRef(null); // Use a ref to store the interval ID
 
   // 加载配置
   const siteName = import.meta.env.VITE_SITE_NAME;
@@ -40,6 +41,7 @@ const Header = observer(({ getSiteData }) => {
     getSiteData();
     setLastClickTime(currentTime);
     fetchMessageContent();
+    resetAutoRefresh();
   };
     // Fetch message content from the server
   const fetchMessageContent = async () => {
@@ -77,9 +79,29 @@ const Header = observer(({ getSiteData }) => {
       console.error('Error fetching message content:', error);
     }
   };
+    // Function to set up auto-refresh
+  const setupAutoRefresh = () => {
+    autoRefreshRef.current = setInterval(() => {
+      refreshStatus();
+    }, 300000); // 300000 ms = 5 minutes
+  };
+
+  // Function to reset auto-refresh
+  const resetAutoRefresh = () => {
+    if (autoRefreshRef.current) {
+      clearInterval(autoRefreshRef.current);
+    }
+    setupAutoRefresh();
+  };
 
   useEffect(() => {
     fetchMessageContent(); // Fetch the message content when the component mounts
+    setupAutoRefresh(); // Set up auto-refresh on component mount
+    return () => {
+      if (autoRefreshRef.current) {
+        clearInterval(autoRefreshRef.current);
+      }
+    };
   }, []);
 
   return (
