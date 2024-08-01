@@ -44,13 +44,16 @@ const Header = observer(({ getSiteData }) => {
     resetAutoRefresh();
   };
     // Fetch message content from the server
-  const fetchMessageContent = async () => {
-    try {
-      const response = await fetch('https://member.mysteryteam.org.cn/Qinglong/testpage/getmessage');
-      const data = await response.json();
+const fetchMessageContent = async () => {
+  try {
+    const response = await fetch('https://member.mysteryteam.org.cn/Qinglong/testpage/getmessage');
+    const data = await response.json();
+
+    // 检查是否包含 message 字段
+    if (data.message) {
       setRemoteContent(data.message);
       messageApi.open({
-        key: 'updata',
+        key: 'update',
         type: 'info',
         icon: <img src="https://cdn.mysteryteam.org.cn/images/info.png" style={{ width: '50px', height: '50px' }} alt="info icon" />,
         content: (
@@ -58,16 +61,16 @@ const Header = observer(({ getSiteData }) => {
             <span style={{ fontSize: '25px' }} dangerouslySetInnerHTML={{ __html: data.message }} />
             <button
               onClick={() => messageApi.destroy()}
-        style={{
-          position: 'absolute',
-          right: '10px',
-          bottom: '5px',
-          padding: '10px 20px',
-          backgroundColor: '#6495ED',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
+              style={{
+                position: 'absolute',
+                right: '10px',
+                bottom: '5px',
+                padding: '10px 20px',
+                backgroundColor: '#6495ED',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}
             >
               关闭
             </button>
@@ -75,10 +78,17 @@ const Header = observer(({ getSiteData }) => {
         ),
         duration: 5,
       });
-    } catch (error) {
-      console.error('Error fetching message content:', error);
+    }else
+    {
+      // 获取当前时间和日期
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace('T', ' '); // 格式化为 'YYYY-MM-DD HH:MM:SS'
+      console.log(`没有收到远端下发的公告 - ${formattedDate}`);
     }
-  };
+  } catch (error) {
+    console.error('Error fetching message content:', error);
+  }
+};
     // Function to set up auto-refresh
   const setupAutoRefresh = () => {
     autoRefreshRef.current = setInterval(() => {
