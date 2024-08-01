@@ -46,7 +46,7 @@ const Header = observer(({ getSiteData }) => {
     // Fetch message content from the server
   const fetchMessageContent = async () => {
     try {
-      const response = await fetch('https://member.mysteryteam.org.cn/Qinglong/testpage/getmessage.php');
+      const response = await fetch('https://member.mysteryteam.org.cn/Qinglong/testpage/getmessage');
       const data = await response.json();
       setRemoteContent(data.message);
       messageApi.open({
