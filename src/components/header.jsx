@@ -51,6 +51,7 @@ const fetchMessageContent = async () => {
 
     // 检查是否包含 message 字段
     if (data.message) {
+      console.log('Message found:', data.message); // Log the message content
       setRemoteContent(data.message);
       messageApi.open({
         key: 'update',
