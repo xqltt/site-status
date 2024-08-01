@@ -101,6 +101,7 @@ const Header = observer(({ getSiteData }) => {
       if (autoRefreshRef.current) {
         clearInterval(autoRefreshRef.current);
       }
+      setupAutoRefresh();
     };
   }, []);
 
