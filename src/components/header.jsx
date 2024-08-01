@@ -80,9 +80,22 @@ const fetchMessageContent = async () => {
       });
     }else
     {
-      // 获取当前时间和日期
       const now = new Date();
-      const formattedDate = now.toISOString().slice(0, 19).replace('T', ' '); // 格式化为 'YYYY-MM-DD HH:MM:SS'
+      const options = {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      
+      const formatter = new Intl.DateTimeFormat('zh-CN', options);
+      const parts = formatter.formatToParts(now);
+      const formattedDate = `${parts[4].value}-${parts[0].value}-${parts[2].value} ${parts[6].value}:${parts[8].value}:${parts[10].value}`;
+      
       console.log(`没有收到远端下发的公告 - ${formattedDate}`);
     }
   } catch (error) {
