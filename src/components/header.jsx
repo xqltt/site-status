@@ -83,7 +83,7 @@ const Header = observer(({ getSiteData }) => {
   const setupAutoRefresh = () => {
     autoRefreshRef.current = setInterval(() => {
       refreshStatus();
-    }, 300000); // 300000 ms = 5 minutes
+    }, 5000); // 300000 ms = 5 minutes
   };
 
   // Function to reset auto-refresh
