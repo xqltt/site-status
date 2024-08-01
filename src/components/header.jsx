@@ -94,7 +94,7 @@ const fetchMessageContent = async () => {
       
       const formatter = new Intl.DateTimeFormat('zh-CN', options);
       const parts = formatter.formatToParts(now);
-      const formattedDate = `${parts[4].value}-${parts[0].value}-${parts[2].value} ${parts[6].value}:${parts[8].value}:${parts[10].value}`;
+      const formattedDate = `${parts[0].value}-${parts[2].value}-${parts[4].value} ${parts[6].value}:${parts[8].value}:${parts[10].value}`;
       
       console.log(`没有收到远端下发的公告 - ${formattedDate}`);
     }
