@@ -21,7 +21,7 @@ const Footer = () => {
         <p>
           Copyright&nbsp;&copy;&nbsp;2020&nbsp;-&nbsp;{new Date().getFullYear()}
           &nbsp;
-          <CustomLink to="https://mysteryteam.org.cn" text="The Mystery Team" />
+          <CustomLink to="https://mysteryteam.org.cn" text="The Mystery Team" /> && <CustomLink to="https://dash.uint.cloud/status/server" text="UiNt Cloud 云服务状态" />
           {siteIcp ? (
             <React.Fragment>
               &nbsp;|&nbsp;
